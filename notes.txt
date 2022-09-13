@@ -1,0 +1,90 @@
+************************************************************************************************************
+************************************************************************************************************
+	Notes
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+============================================================================================================
+	Powershell Scripts
+============================================================================================================
+
+	There are four scripts we currently use for bringing in the PowerBI data:
+		pbi_Main_Meta.ps1							- this is the primary meta script that brings down the reports, apps, etc.;
+		pbi_Activity_Events.ps1						- this is for the run data;
+		pbi_User_Identity_Main_Meta.ps1				- this makes calls to MS Graph to associate userIds (from PowerBI objects) to on-prem user account identifiers - for staging users later on;
+		pbi_User_Identity_Activity_Events.ps1		- this makes calls to MS Graph to associate userIds (from PowerBI objects) to on-prem user account identifiers - for staging users later on;
+
+	The scripts read from file Config.json.  Config.json has the organization specific info that is sensitive to the organization (local SQL server info and PowerBI tenant credentials for connecting to the PBI service).
+
+	It's likely the following Powershell modules will need to be installed:
+		SqlServer
+		MicrosoftPowerBIMgmt.Profile
+		MicrosoftPowerBIMgmt.Admin
+
+
+
+
+============================================================================================================
+	SSIS
+============================================================================================================
+
+	To hopefully keep things more in line with your implementation, I've used your latest 3/22 SSIS ETL and made only the following changes:
+
+		Added package ETL-PowerBI.dtsx - 
+		
+			ETL-PowerBI.dtsx includes the steps we've taken to this point - calls the pbi*Main_Meta scripts mentioned above;
+		
+		Updated package ETL-RunData.dtsx - 
+			I've added the steps necessary to include the PowerBI run history - calls the pbi*Activity_Events scripts mentioned above;
+
+
+
+
+============================================================================================================
+	SQL
+============================================================================================================
+
+	Our [Atlas_staging].[stage].[ReportObjectStaging] staging table does include an extra column for the PowerBI Workspace Name:
+	
+		CREATE TABLE [stage].[ReportObjectStaging](
+			...
+			[PowerBiWorkspaceName] [nvarchar](255) NULL,
+		...
+
+	And our [Atlas].[dbo].[ReportObject] table has the related column for persistence:
+
+		CREATE TABLE [dbo].[ReportObject](
+			...
+			[PowerBiWorkspaceName] [nvarchar](255) NULL,
+		...
+
+	Also, to persist the PBI activity events more than 30 days ago, we have a separate table in [Atlas_staging] that continues to grow with history since we've gone live with PBI:
+		
+		USE [Atlas_staging]
+		GO
+
+		SET ANSI_NULLS ON
+		GO
+
+		SET QUOTED_IDENTIFIER ON
+		GO
+
+		CREATE TABLE [dbo].[PbiActivityEventHistory](
+			[id] [uniqueidentifier] NOT NULL,
+			[creationTime] [datetime] NULL,
+			[operation] [nvarchar](255) NULL,
+			[data] [nvarchar](max) NULL,
+			[runId] [bigint] NULL,
+		 CONSTRAINT [pk_PbiActivityEventHistory] PRIMARY KEY CLUSTERED 
+		(
+			[id] ASC
+		)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+		) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+		GO
+		
+		
+		
+		
+That's all!  Let us know if any questions :)
