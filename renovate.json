@@ -15,7 +15,7 @@
   "labels": ["maintenance", "renovate"],
   "packageRules": [
     {
-      "matchUpdateTypes": ["pin", "digest"],
+      "matchUpdateTypes": ["pin","digest", "minor", "patch"],
       "automerge": true
     },
     {
