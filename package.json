@@ -1,11 +1,11 @@
 {
   "name": "atlas-etl-powerbi",
-  "version": "1.0.8",
+  "version": "1.0.0",
   "description": "Atlas BI Library PowerBI ETL",
   "private": true,
   "main": "index.js",
   "scripts": {
-     "commit": "git add . && cz --no-verify"
+    "commit": "git add . && cz --no-verify"
   },
   "repository": {
     "type": "git",
