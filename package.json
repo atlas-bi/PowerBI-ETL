@@ -1,6 +1,6 @@
 {
   "name": "atlas-etl-powerbi",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Atlas BI Library PowerBI ETL",
   "private": true,
   "main": "index.js",
@@ -27,7 +27,7 @@
     "@semantic-release/npm": "11.0.1",
     "@semantic-release/release-notes-generator": "12.1.0",
     "cz-conventional-changelog": "3.3.0",
-    "semantic-release": "22.0.7"
+    "semantic-release": "22.0.8"
   },
   "config": {
     "commitizen": {
