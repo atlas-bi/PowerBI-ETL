@@ -1,39 +1,25 @@
 {
   "extends": [
-    "config:base",
-    "group:allNonMajor",
-    ":separateMultipleMajorReleases",
+    "config:recommended",
     ":ignoreUnstable",
     ":enableVulnerabilityAlertsWithLabel(security)",
     ":rebaseStalePrs",
-    ":npm",
-    "npm:unpublishSafe"
+    ":automergeDigest",
+    ":automergePatch",
+    ":automergeMinor",
+    ":automergeMajor"
   ],
   "baseBranches": ["dev"],
-  "bumpVersion": "patch",
   "commitMessagePrefix": "chore(deps)",
   "labels": ["maintenance", "renovate"],
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true,
   "packageRules": [
     {
-      "matchUpdateTypes": ["pin","digest", "minor", "patch"],
-      "automerge": true
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "automerge": true
-    },
-    {
-      "extends": "packages:linters",
-      "groupName": "linters",
-      "automerge": true
-    },
-    {
-      "extends": "packages:test",
-      "groupName": "test packages",
-      "automerge": true
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
+      "description": "Group and automerge all GitHub Actions updates (incl. major)",
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
       "automerge": true
     }
   ],
