@@ -1,37 +1,14 @@
 {
   "name": "atlas-etl-powerbi",
-  "version": "1.0.95",
-  "description": "Atlas BI Library PowerBI ETL",
   "private": true,
-  "main": "index.js",
-  "scripts": {
-    "commit": "git add . && cz --no-verify"
-  },
+  "description": "Atlas BI Library PowerBI ETL",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atlas-bi/Power-BI-ETL.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "GLP-3.0-or-later",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/atlas-bi/Power-BI-ETL/issues"
   },
-  "homepage": "https://github.com/atlas-bi/Power-BI-ETL#readme",
-  "devDependencies": {
-    "@semantic-release/changelog": "7.0.0",
-    "@semantic-release/commit-analyzer": "13.0.1",
-    "@semantic-release/exec": "7.1.0",
-    "@semantic-release/git": "11.0.1",
-    "@semantic-release/github": "12.0.11",
-    "@semantic-release/npm": "13.2.0",
-    "@semantic-release/release-notes-generator": "14.1.1",
-    "cz-conventional-changelog": "3.3.0",
-    "semantic-release": "25.0.9"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  "homepage": "https://github.com/atlas-bi/Power-BI-ETL#readme"
 }

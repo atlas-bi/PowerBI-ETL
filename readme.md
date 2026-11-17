@@ -7,7 +7,7 @@
 
 <p align="center">
  <a href="https://discord.gg/hdz2cpygQD"><img alt="discord chat" src="https://badgen.net/discord/online-members/hdz2cpygQD/" /></a>
- <a href="https://github.com/atlas-bi/Solr-Search-ETL/releases"><img alt="latest release" src="https://badgen.net/github/release/atlas-bi/Solr-Search-ETL" /></a>
+ <a href="https://github.com/atlas-bi/Power-BI-ETL/releases"><img alt="latest release" src="https://badgen.net/github/release/atlas-bi/Power-BI-ETL" /></a>
 
 <p align="center">Load PowerBI metadata into the Atlas database.
  </p>
@@ -22,4 +22,4 @@ The SSIS package in `/etl` can be added in with the other ETL SSIS packages in V
 
 ## 🎁 Contributing
 
-This repository uses commitzen. Please commit `npm run commit && git push`.
+Use [conventional commits](https://www.conventionalcommits.org/) (e.g. `feat:`, `fix:`, `chore:`). Releases are cut automatically from `master` via semantic-release.
